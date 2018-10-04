@@ -77,7 +77,7 @@ namespace AsciiArt
         {
             string ascii = "`^\",:;Il!i~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$";
 
-            int result = Scale(value, ascii.Length, 255);
+            int result = Scale(value, ascii.Length- 1, 255);
             return ascii[result];
         }
 
