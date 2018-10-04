@@ -11,5 +11,6 @@ namespace AsciiArt
     {
         int[,] GetBrightnessMatrix(Bitmap bitmap);
         void PrintPixelValues();
+        string GetAsciiToPixelMap();
     }
 }

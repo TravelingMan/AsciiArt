@@ -19,8 +19,8 @@ namespace AsciiArt
             string path = @"C:\Geezus.jpg";
 
             IBrightnessStrategy strategy = GetStrategy(BrightnessAlgorithms.Lightness, path);
-            strategy.PrintPixelValues();
-                        
+            Console.WriteLine(strategy.GetAsciiToPixelMap());
+
             Console.ReadKey();
         }
 

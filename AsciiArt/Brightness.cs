@@ -72,5 +72,54 @@ namespace AsciiArt
 
             Console.WriteLine(Environment.NewLine + "Processing complete.");
         }
+
+        public char Translate(int value)
+        {
+            string ascii = "`^\",:;Il!i~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$";
+
+            int result = Scale(value, ascii.Length, 255);
+            return ascii[result];
+        }
+
+        /// <summary>
+        /// Scales assume that minimum ascii and RGB values will be 0.
+        /// </summary>
+        /// <param name="unscaledNumber">The input that needs to be scaled</param>
+        /// <param name="maxAsciiCode">The total number of ASCII characters</param>
+        /// <param name="maxRGB">The maximum value of the RGB input, likely 255</param>
+        /// <returns></returns>
+        public int Scale(int unscaledNumber, int maxAsciiCode, int maxRGB)
+        {
+            return maxAsciiCode * unscaledNumber / maxRGB;
+        }
+
+        public string GetAsciiToPixelMap()
+        {
+            int[,] target = GetBrightnessMatrix(bitmap);            
+            string[,] mappedAsciiResult = new string[bitmap.Width, bitmap.Height];
+
+            for (int i = 0; i < bitmap.Width; i++)
+            {
+                for (int j = 0; j < bitmap.Height; j++)
+                {
+                    mappedAsciiResult[i, j] = Translate(target[i,j]).ToString();
+                }
+            }
+
+            // Redundant stuff right down 'ere
+            string result = "";
+
+            for (int i = 0; i < bitmap.Width; i++)
+            {
+                for (int j = 0; j < bitmap.Height; j++)
+                {
+                    result += mappedAsciiResult[i, j];
+                }
+
+                result += Environment.NewLine;
+            }
+
+            return result;
+        }
     }
 }
